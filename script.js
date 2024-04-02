@@ -6,7 +6,8 @@ let handCard = document.getElementById('handCard');
 let cardContainer = document.getElementById('cardContainer');
 let optionCard1 = document.getElementById('optionCard1');
 let optionCard2 = document.getElementById('optionCard2');
-
+let iscore = 100
+let cipher = false
 
 function shuffleDeck() {
   deck = [];
@@ -21,7 +22,8 @@ function shuffleDeck() {
 
 // 抽牌函數
 function drawCard() {
-  handCard.style.display = 'none'; // 隱藏手牌抽牌按鈕
+  document.getElementById('score').innerText=100
+  handCard.style.display = 'none';
   let drawnCard = deck[currentCard++];
   hand = [drawnCard];
   let resultElement = document.getElementById('result');
@@ -39,29 +41,56 @@ function SmallClick() {chooseOption('小');}
 
 
 function chooseOption(choice) {
+  const score = document.getElementById('score');
+  let curscore = parseInt(score.innerText,10);
+  const bet = parseInt(document.getElementById('bet').value.trim(),10)
+  let msg = document.getElementById('msg');
+
+  if (curscore <= 0) {
+    msg.innerText = '沒分數了'
+    restartGame()
+    return;
+  } else if ((bet > curscore) || (bet <= 0)) {
+    msg.innerText = '分數 > 下注 > 0'
+    return;
+  } else {
+    msg.innerText = ''
+  }
+
   let drawnCard = deck[currentCard++];
   let resultElement = document.getElementById('result');
   resultElement.innerHTML = `當前關卡: ${level}<br>你的手牌: ${hand[hand.length - 1]} 選擇了"${choice}"，抽到的牌: ${drawnCard}`;
   let compareResult = '';
+
   if ((choice === '大' && drawnCard > hand[hand.length - 1]) || (choice === '小' && drawnCard < hand[hand.length - 1])) {
-    if(level === deck.length-1){
-      resultElement.innerHTML = `恭喜完成${deck.length-1}關!`;
+    iscore += bet
+    compareResult = `獲勝! 增加${bet}<br>下一關，第${level + 1}關<br> 新的手牌: ${drawnCard}`;
+  } else {
+    iscore -= bet
+    compareResult = `失敗! 扣除${bet}<br>下一關，第${level + 1}關<br> 新的手牌: ${drawnCard}`;
+    if (iscore <= 0) {
+      msg.innerText = '沒分數了'
       restartGame()
       return;
     }
-    compareResult = `獲勝<br>下一關，第${level+1}關<br> 新的手牌: ${drawnCard}`;
-    level++;
-  } else {
-    compareResult = `闖關失敗！<br>完成了${level}關<br>重新開始`;
-    restartGame()
   }
+  if((level === 15)||(level === deck.length-1)){
+    resultElement.innerHTML = `恭喜完成${level}關!`;
+    restartGame()
+    return;
+  }
+  level++;
+  
+  score.innerText=iscore
   hand.push(drawnCard);
   resultElement.innerHTML += `${compareResult}`;
   //獲勝率
-  const result = deck.filter(item => !hand.includes(item));
-  const suc = result.filter(item => item < drawnCard);
-  optionCard1.innerHTML=`大<span>${(100-suc.length/result.length*100).toFixed(2)}%</span>`
-  optionCard2.innerHTML=`小<span>${(suc.length/result.length*100).toFixed(2)}%</span>`
+  if(cipher){
+    const result = deck.filter(item => !hand.includes(item));
+    const suc = result.filter(item => item < drawnCard);
+    optionCard1.innerHTML=`大<span style="font-size: 10px;">${(100-suc.length/result.length*100).toFixed(2)}%</span>`
+    optionCard2.innerHTML=`小<span style="font-size: 10px;">${(suc.length/result.length*100).toFixed(2)}%</span>`
+  }
 }
 
 function restartGame() {
@@ -69,11 +98,13 @@ function restartGame() {
   optionCard2.style.display = 'none';
   handCard.style.lineHeight = '150px'
   handCard.style.display = 'block';
+  document.getElementById('msg').innerText=''
   optionCard1.removeEventListener('click', BigClick);
   optionCard2.removeEventListener('click', SmallClick);
   currentCard = 0;
   hand = [];
   level = 1;
+  iscore = 100;
   shuffleDeck();
 }
 

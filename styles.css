@@ -88,6 +88,7 @@ body {
     max-width: 600px;
     margin: 50px auto;
     text-align: center;
+    user-select: none;
   }
   
   #result {
@@ -101,9 +102,6 @@ body {
     flex-wrap: wrap;
   }
   
-  span{
-    font-size: 10px;
-  }
   .card {
     width: 100px;
     height: 150px;
