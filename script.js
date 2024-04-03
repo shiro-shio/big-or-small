@@ -27,7 +27,9 @@ function drawCard() {
   let drawnCard = deck[currentCard++];
   hand = [drawnCard];
   let resultElement = document.getElementById('result');
-  resultElement.innerHTML = `當前關卡: ${level}<br>你的手牌: ${hand[hand.length - 1]}`;
+  let lv = document.getElementById('lv');
+  lv.innerHTML = `關卡: ${level}`
+  resultElement.innerHTML = `你的手牌: ${hand[hand.length - 1]}`;
   optionCard1.style.display = 'flex';
   optionCard1.innerHTML = '大';
   optionCard1.addEventListener('click', BigClick);
@@ -42,24 +44,27 @@ function SmallClick() {chooseOption('小');}
 
 function chooseOption(choice) {
   const score = document.getElementById('score');
+  let lv = document.getElementById('lv');
   let curscore = parseInt(score.innerText,10);
+  let resultElement = document.getElementById('result');
   const bet = parseInt(document.getElementById('bet').value.trim(),10)
-  let msg = document.getElementById('msg');
+  //let msg = document.getElementById('msg');
 
   if (curscore <= 0) {
-    msg.innerText = '沒分數了'
+    resultElement.innerText = '沒分數了'
+
     restartGame()
     return;
   } else if ((bet > curscore) || (bet <= 0)) {
-    msg.innerText = '分數 > 下注 > 0'
+    resultElement.innerText = '分數 > 下注 > 0'
     return;
   } else {
-    msg.innerText = ''
+    resultElement.innerText = ''
   }
 
   let drawnCard = deck[currentCard++];
-  let resultElement = document.getElementById('result');
-  resultElement.innerHTML = `當前關卡: ${level}<br>你的手牌: ${hand[hand.length - 1]} 選擇了"${choice}"，抽到的牌: ${drawnCard}`;
+  lv.innerHTML = `關卡: ${level}`
+  resultElement.innerHTML = `你的手牌: ${hand[hand.length - 1]} 選擇了"${choice}"，抽到的牌: ${drawnCard}`;
   let compareResult = '';
 
   if ((choice === '大' && drawnCard > hand[hand.length - 1]) || (choice === '小' && drawnCard < hand[hand.length - 1])) {
@@ -69,7 +74,8 @@ function chooseOption(choice) {
     iscore -= bet
     compareResult = `失敗! 扣除${bet}<br>下一關，第${level + 1}關<br> 新的手牌: ${drawnCard}`;
     if (iscore <= 0) {
-      msg.innerText = '沒分數了'
+      score.innerText=iscore
+      resultElement.innerText = '沒分數了'
       restartGame()
       return;
     }
@@ -98,7 +104,7 @@ function restartGame() {
   optionCard2.style.display = 'none';
   handCard.style.lineHeight = '150px'
   handCard.style.display = 'block';
-  document.getElementById('msg').innerText=''
+  //document.getElementById('msg').innerText=''
   optionCard1.removeEventListener('click', BigClick);
   optionCard2.removeEventListener('click', SmallClick);
   currentCard = 0;

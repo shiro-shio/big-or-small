@@ -7,7 +7,6 @@
   <title>大或小</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
   <div class="top-bar">
     <div class="contact-message">聯絡資訊 :</div>
@@ -20,28 +19,45 @@
         <span>Instagram</span>
     </a-->
     <a class="social-link" href="https://twitter.com/shiroshio0507" target="_blank">
-        <img src="https://abs.twimg.com/responsive-web/client-web/icon-default.522d363a.png" alt="Twitter">
-        <span>Twitter</span>
+      <img src="https://abs.twimg.com/responsive-web/client-web/icon-default.522d363a.png" alt="Twitter">
+      <span>Twitter</span>
     </a>
     <div class="extra-links">
-        <a href="https://example.com/link1" target="_blank"></a>
-        <a href="https://example.com/link2" target="_blank"></a>
+      <a href="https://example.com/link1" target="_blank"></a>
+      <a href="https://example.com/link2" target="_blank"></a>
     </div>
-</div>  
+  </div>
   <div class="container">
     <h1>大或小</h1>
-    <div style="font-size: 20px;">
-      <div>
-        <span>當前分數:</span>
-        <span id="score">100</span>
+    <div id="lv">關卡:0</div>
+    <div id="p1">
+      <span>分數:</span>
+      <span id="score">100</span>
+    </div>
+
+    <div id="bets">
+      <div id="beted">
+        <span>下注:</span>
+        <input type="number" id="bet" value="100" style="width: 100px;font-size: 20px;">
       </div>
-      <div style="display: flex;justify-content: center;">
-        <span>下注</span>
-        <input type="number" id="bet" value="100" style="width: 100px;font-size: 15px;">
-        <span id="msg"></span>
+      <div id="betbt">
+        <div>
+          <button class="bt1" id="add1">+ 一百</button>
+          <button class="bt1" id="add2">+ 一千</button>
+          <button class="bt1" id="add3">+ 一萬</button>
+          <button class="bt1" id="add4">+ 十萬</button>
+        </div>
+        <div>
+          <button class="bt1" id="reduce1">– 一百</button>
+          <button class="bt1" id="reduce2">– 一千</button>
+          <button class="bt1" id="reduce3">– 一萬</button>
+          <button class="bt1" id="reduce4">– 十萬</button>
+        </div>
       </div>
     </div>
+
     <div id="result">點擊開始遊戲</div>
+
     <div id="cardContainer" class="card-container">
       <div id="handCard" class="card" onclick="drawCard()">開始</div>
       <div id="optionCard1" class="card" style="display: none;"></div>

@@ -6,9 +6,11 @@ body {
 .top-bar {
   display: flex;
   align-items: center;
-  background-color: #f8f9fa; /* 淺灰背景色 */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  height: 50px; /* 設置一個固定的高度 */
+  background-color: #f8f9fa;
+  /* 淺灰背景色 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 50px;
+  /* 設置一個固定的高度 */
   margin-bottom: 25px;
 }
 
@@ -16,17 +18,20 @@ body {
   display: inline-block;
   position: relative;
   margin: 0 15px;
-  text-decoration: none; /* 移除底線 */
+  text-decoration: none;
+  /* 移除底線 */
 }
 
 .social-link img {
-  width: 30px; /* LOGO大小 */
+  width: 30px;
+  /* LOGO大小 */
   height: auto;
   transition: transform 0.3s ease;
 }
 
 .social-link:hover img {
-  transform: scale(1.1); /* 懸停時放大LOGO */
+  transform: scale(1.1);
+  /* 懸停時放大LOGO */
 }
 
 .social-link span {
@@ -37,8 +42,10 @@ body {
   bottom: -20px;
   transform: translateX(-50%);
   transition: opacity 0.3s ease, visibility 0s linear 0.3s;
-  color: #007bff; /* 文字顏色 */
-  white-space: nowrap; /* 避免文字換行 */
+  color: #007bff;
+  /* 文字顏色 */
+  white-space: nowrap;
+  /* 避免文字換行 */
 }
 
 .social-link:hover span {
@@ -54,72 +61,121 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 15px; /* 兩側的padding */
-  height: 100%; /* 高度設為100%以填滿.top-bar的高度 */
+  padding: 0 15px;
+  /* 兩側的padding */
+  height: 100%;
+  /* 高度設為100%以填滿.top-bar的高度 */
 }
 
 .extra-links {
   margin-right: 20px;
-  margin-left: auto; /* 將額外連結推向右側 */
+  margin-left: auto;
+  /* 將額外連結推向右側 */
   display: flex;
   align-items: center;
 }
 
 .extra-links a {
   text-decoration: none;
-  color: #007bff; /* 設定連結顏色 */
-  margin-left: 15px; /* 設定連結間距 */
+  color: #007bff;
+  /* 設定連結顏色 */
+  margin-left: 15px;
+  /* 設定連結間距 */
   transition: color 0.3s ease-in-out;
 }
 
 .extra-links a:hover {
-  color: #0056b3; /* 鼠標懸停時的顏色 */
+  color: #0056b3;
+  /* 鼠標懸停時的顏色 */
 }
 
-.social-link, .extra-links {
+.social-link,
+.extra-links {
   display: flex;
   align-items: center;
-  height: 100%; /* 確保填滿.top-bar的高度 */
+  height: 100%;
+  /* 確保填滿.top-bar的高度 */
 }
 
 
-  
-  .container {
-    max-width: 600px;
-    margin: 50px auto;
-    text-align: center;
-    user-select: none;
-  }
-  
-  #result {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .card-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  
-  .card {
-    width: 100px;
-    height: 150px;
-    background-color: lightblue;
-    /*display: inline-block;*/
-    margin: 10px;
-    cursor: pointer;
-    border-radius: 10px;
-    font-size: 36px;
-    /*line-height: 150px;*/
-    text-align: center;
-    transition: transform 0.3s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  .card:hover {
-    transform: scale(1.1);
-  }
-  
+
+.container {
+  background-color: antiquewhite;
+  border: 1px solid;
+  border-radius: 15px;
+  border-color: antiquewhite;
+  width: 500px;
+  height: 700px;
+  max-width: 600px;
+  margin: 50px auto;
+  text-align: center;
+  user-select: none;
+}
+#lv{
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+#bets{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+#beted{
+  font-size: 25px;
+  display: flex;
+  align-items: stretch;
+}
+#betbt{
+  width: 250px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
+}
+.bt1{
+  width: 55px;
+  height: 25px;
+  border-radius: 10px;
+  border: solid 1px;
+}
+#p1{
+  font-size: 30px;
+  width: auto;
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+#result {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 100px;
+  height: 150px;
+  background-color: lightblue;
+  /*display: inline-block;*/
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 36px;
+  /*line-height: 150px;*/
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card:hover {
+  transform: scale(1.1);
+}
