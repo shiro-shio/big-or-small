@@ -11,7 +11,7 @@ let cipher = false
 
 function shuffleDeck() {
   deck = [];
-  for (let i = 1; i <= 101; i++) {
+  for (let i = 1; i <= 21; i++) {
     deck.push(i);
   }
   for (let i = deck.length - 1; i > 0; i--) {
@@ -26,6 +26,7 @@ function drawCard() {
   document.getElementById('score').innerText=100;
   handCard.style.display = 'none';
   let drawnCard = deck[currentCard++];
+  deck.splice(0, 1);
   hand = [drawnCard];
   let resultElement = document.getElementById('result');
   let lv = document.getElementById('lv');
@@ -81,7 +82,10 @@ function chooseOption(choice) {
     resultElement.innerText = ''
   }
 
-  let drawnCard = deck[currentCard++];
+  //let drawnCard = deck[currentCard++];
+  drawnIndex=Math.floor(Math.random() * deck.length)
+  let drawnCard = deck[drawnIndex];
+  deck.splice(drawnIndex, 1);
   lv.innerHTML = `關卡: ${level}`
   resultElement.innerHTML = `你的手牌: ${hand[hand.length - 1]} 選擇"${choice}"，獲得的牌: ${drawnCard}<br>`;
   let compareResult = '';
