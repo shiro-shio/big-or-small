@@ -53,8 +53,8 @@ buttons.forEach(button => {
         const curscore = parseInt(score.innerText,10);
         const bet = parseInt(document.getElementById('bet').value.trim(),10)
         let tot = bet+valueChange
-        if (tot<100){
-          tot = 100
+        if (tot < 100){
+          tot = curscore
         }else if(tot > curscore){
           tot = curscore
         }
