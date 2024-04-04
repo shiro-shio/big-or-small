@@ -2,10 +2,10 @@ let deck = [];
 let currentCard = 0;
 let hand = [];
 let level = 1;
-let handCard = document.getElementById('handCard');
-let cardContainer = document.getElementById('cardContainer');
-let optionCard1 = document.getElementById('optionCard1');
-let optionCard2 = document.getElementById('optionCard2');
+const handCard = document.getElementById('handCard');
+const cardContainer = document.getElementById('cardContainer');
+const optionCard1 = document.getElementById('optionCard1');
+const optionCard2 = document.getElementById('optionCard2');
 let iscore = 100
 let cipher = false
 
@@ -20,9 +20,10 @@ function shuffleDeck() {
   }
 }
 
+
 // 抽牌函數
 function drawCard() {
-  document.getElementById('score').innerText=100
+  document.getElementById('score').innerText=100;
   handCard.style.display = 'none';
   let drawnCard = deck[currentCard++];
   hand = [drawnCard];
@@ -42,13 +43,31 @@ function BigClick() {chooseOption('大');}
 function SmallClick() {chooseOption('小');}
 
 
+const buttons = document.querySelectorAll('.bt1');
+// 監聽按鈕點擊事件
+buttons.forEach(button => {
+    button.addEventListener('click', () => {
+        const valueChange = parseInt(button.value);
+        const score = document.getElementById('score');
+        const curscore = parseInt(score.innerText,10);
+        const bet = parseInt(document.getElementById('bet').value.trim(),10)
+        let tot = bet+valueChange
+        if (tot<100){
+          tot = 100
+        }else if(tot > curscore){
+          tot = curscore
+        }
+        document.getElementById('bet').value = tot
+    });
+});
+
+
 function chooseOption(choice) {
   const score = document.getElementById('score');
   let lv = document.getElementById('lv');
   let curscore = parseInt(score.innerText,10);
   let resultElement = document.getElementById('result');
   const bet = parseInt(document.getElementById('bet').value.trim(),10)
-  //let msg = document.getElementById('msg');
 
   if (curscore <= 0) {
     resultElement.innerText = '沒分數了'
@@ -64,30 +83,29 @@ function chooseOption(choice) {
 
   let drawnCard = deck[currentCard++];
   lv.innerHTML = `關卡: ${level}`
-  resultElement.innerHTML = `你的手牌: ${hand[hand.length - 1]} 選擇了"${choice}"，抽到的牌: ${drawnCard}`;
+  resultElement.innerHTML = `你的手牌: ${hand[hand.length - 1]} 選擇"${choice}"，獲得的牌: ${drawnCard}<br>`;
   let compareResult = '';
 
   if ((choice === '大' && drawnCard > hand[hand.length - 1]) || (choice === '小' && drawnCard < hand[hand.length - 1])) {
     iscore += bet
-    compareResult = `獲勝! 增加${bet}<br>下一關，第${level + 1}關<br> 新的手牌: ${drawnCard}`;
+    score.innerText = iscore
+    compareResult = `獲勝! 增加${bet}<br>第${level + 1}關 新的手牌: ${drawnCard}`;
   } else {
     iscore -= bet
-    compareResult = `失敗! 扣除${bet}<br>下一關，第${level + 1}關<br> 新的手牌: ${drawnCard}`;
+    compareResult = `失敗! 扣除${bet}<br>第${level + 1}關 新的手牌: ${drawnCard}`;
     if (iscore <= 0) {
-      score.innerText=iscore
-      resultElement.innerText = '沒分數了'
+      score.innerText = iscore
+      resultElement.innerHTML += `新的手牌: ${drawnCard}<br>輸光了!!`
       restartGame()
       return;
     }
   }
   if((level === 15)||(level === deck.length-1)){
-    resultElement.innerHTML = `恭喜完成${level}關!`;
+    resultElement.innerHTML += `新的手牌: ${drawnCard}<br>恭喜完成${level}關!`;
     restartGame()
     return;
   }
   level++;
-  
-  score.innerText=iscore
   hand.push(drawnCard);
   resultElement.innerHTML += `${compareResult}`;
   //獲勝率
@@ -99,17 +117,31 @@ function chooseOption(choice) {
   }
 }
 
+function sharescore(){
+  const shareDiv = document.getElementById('share');
+  const existingShareButton = document.getElementById('x_share');
+  if (existingShareButton) {
+      shareDiv.removeChild(existingShareButton);
+  }
+  const twitterShareButton = document.createElement('a');
+  twitterShareButton.id = 'x_share';
+  twitterShareButton.className = 'twitter-share-button';
+  twitterShareButton.href = `https://twitter.com/intent/tweet?via=shiroshio0507&url=${window.location.href}&hashtags=大或小&text=遊戲中獲得了${iscore}分`;
+  twitterShareButton.textContent = '分享到 X(Twitter)';
+  shareDiv.appendChild(twitterShareButton);
+}
+
 function restartGame() {
   optionCard1.style.display = 'none';
   optionCard2.style.display = 'none';
   handCard.style.lineHeight = '150px'
   handCard.style.display = 'block';
-  //document.getElementById('msg').innerText=''
   optionCard1.removeEventListener('click', BigClick);
   optionCard2.removeEventListener('click', SmallClick);
   currentCard = 0;
   hand = [];
   level = 1;
+  sharescore()
   iscore = 100;
   shuffleDeck();
 }

@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>大或小</title>
   <link rel="stylesheet" href="styles.css">
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </head>
 <body>
   <div class="top-bar">
@@ -28,30 +29,30 @@
     </div>
   </div>
   <div class="container">
-    <h1>大或小</h1>
-    <div id="lv">關卡:0</div>
-    <div id="p1">
-      <span>分數:</span>
-      <span id="score">100</span>
+    <div id="title">
+        <h1>大或小</h1>
+        <div id="lv">關卡:0</div>
+        <div id="p1">
+            <span>分數:</span>
+            <span id="score">100</span>
+        </div>
     </div>
 
     <div id="bets">
       <div id="beted">
         <span>下注:</span>
-        <input type="number" id="bet" value="100" style="width: 100px;font-size: 20px;">
+        <input type="number" id="bet" value="100">
       </div>
       <div id="betbt">
         <div>
-          <button class="bt1" id="add1">+ 一百</button>
-          <button class="bt1" id="add2">+ 一千</button>
-          <button class="bt1" id="add3">+ 一萬</button>
-          <button class="bt1" id="add4">+ 十萬</button>
+          <input type="button" class="bt1" id="add1" value="100">
+          <input type="button" class="bt1" id="add2" value="1000">
+          <input type="button" class="bt1" id="add3" value="10000">
         </div>
         <div>
-          <button class="bt1" id="reduce1">– 一百</button>
-          <button class="bt1" id="reduce2">– 一千</button>
-          <button class="bt1" id="reduce3">– 一萬</button>
-          <button class="bt1" id="reduce4">– 十萬</button>
+          <input type="button" class="bt1" id="reduce1" value="-100">
+          <input type="button" class="bt1" id="reduce2" value="-1000">
+          <input type="button" class="bt1" id="reduce3" value="-10000">
         </div>
       </div>
     </div>
@@ -62,6 +63,10 @@
       <div id="handCard" class="card" onclick="drawCard()">開始</div>
       <div id="optionCard1" class="card" style="display: none;"></div>
       <div id="optionCard2" class="card" style="display: none;"></div>
+    </div>
+    <div id="share">
+        <!--a id="x_share" class="twitter-share-button"href="https://twitter.com/intent/tweet?via=shiroshio0507&amp;hashtags=大或小"-->
+        <a id="x_sub" z-index="2" class="twitter-follow-button"href="https://twitter.com/shiroshio0507"></a>
     </div>
   </div>
   <script src="script.js"></script>
