@@ -11,7 +11,7 @@ let cipher = false
 
 function shuffleDeck() {
   deck = [];
-  for (let i = 1; i <= 21; i++) {
+  for (let i = 1; i <= 101; i++) {
     deck.push(i);
   }
   for (let i = deck.length - 1; i > 0; i--) {
@@ -96,9 +96,9 @@ function chooseOption(choice) {
     compareResult = `獲勝! 增加${bet}<br>第${level + 1}關 新的手牌: ${drawnCard}`;
   } else {
     iscore -= bet
+    score.innerText = iscore
     compareResult = `失敗! 扣除${bet}<br>第${level + 1}關 新的手牌: ${drawnCard}`;
     if (iscore <= 0) {
-      score.innerText = iscore
       resultElement.innerHTML += `新的手牌: ${drawnCard}<br>輸光了!!`
       restartGame()
       return;
